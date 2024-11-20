@@ -29,6 +29,7 @@ class User extends Authenticatable
         'role_id',
         'menu_id',
         'google_id',
+        'picture'
 
     ];
     public $timestamps = false;

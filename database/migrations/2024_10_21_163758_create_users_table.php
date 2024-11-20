@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('organization')-> default('University of Belize');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table-> string('picture');
             // $table->string('device_token')->nullable();
             $table->rememberToken();
             $table->integer('user_status_id')->nullable();

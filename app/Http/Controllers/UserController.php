@@ -95,13 +95,26 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function getUserNames()
+
+    public function checkOrCreate(Request $request)
     {
-        // Retrieve only the names of all users
-        $userNames = User::pluck('name');
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'picture' => 'nullable|string',
+        ]);
 
-        // Return the names as a JSON response
-        return response()->json($userNames);
+        // Check if user exists
+        $user = User::where('email', $validatedData['email'])->first();
+
+        if (!$user) {
+            // Create user if they don't exist
+            $user = User::create($validatedData);
+        }
+
+        return response()->json([
+            'message' => 'User checked or created successfully.',
+            'user' => $user,
+        ], 200);
     }
-
 }

@@ -55,10 +55,7 @@ Route::group(['prefix' => 'v1/publicSafety', 'namespace' => 'App\Http\Controller
     Route::apiResource('departmentMembers', DepartmentMemberController::class);
     Route::apiResource('menus', MenuController::class);
     Route::apiResource('menuRoles', MenuRoleController::class);
-    // Route::apiResource('notifications', NotificationController::class);
-    // Route::apiResource('save-token',SaveTokenController::class);
-    // Route::apiResource('send-notification', HomeController::class);
-});
+    });
 
 
 Route::post('/v1/publicSafety/send-notification', function (Request $request, FCMService $fcmService) {
@@ -75,16 +72,8 @@ Route::get('v1/publicSafety/usersTotal', [UserController::class, 'getTotalUsers'
 Route::get('v1/publicSafety/incidentReportTotal', action: [IncidentReportController::class, 'getTotalIncidentReport']);
 Route::get('v1/publicSafety/incidentFileTotal', action: [IncidentFileController::class, 'getTotalIncidentFile']);
 Route::get('v1/publicSafety/totalMessages', [MessageController::class, 'getTotalMessage']);
-
-Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth', 'middleware' => ['auth:sanctum']], function () {
-    Route::get('google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
-    Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
-});
-
-// Route::get('/auth/me', function (Request $request) {
-//     return response()->json(['user' => $request->user()]);
-// });
-
-Route::middleware('auth:sanctum')->get('/getUsername', [GoogleController::class, 'getUser']);
-
 Route::get('v1/publicSafety/usersSearch', [UserController::class, 'userSearch']);
+
+
+
+Route::post('/users/check-or-create', [UserController::class, 'checkOrCreate']);
