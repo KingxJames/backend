@@ -72,8 +72,5 @@ Route::get('v1/publicSafety/usersTotal', [UserController::class, 'getTotalUsers'
 Route::get('v1/publicSafety/incidentReportTotal', action: [IncidentReportController::class, 'getTotalIncidentReport']);
 Route::get('v1/publicSafety/incidentFileTotal', action: [IncidentFileController::class, 'getTotalIncidentFile']);
 Route::get('v1/publicSafety/totalMessages', [MessageController::class, 'getTotalMessage']);
-Route::get('v1/publicSafety/usersSearch', [UserController::class, 'userSearch']);
-
-
-
-Route::post('/users/check-or-create', [UserController::class, 'checkOrCreate']);
+Route::get('v1/publicSafety/usersSearch', [UserController::class, 'usersSearch']);
+Route::post('v1/publicSafety/loginOrCreate', [UserController::class, 'loginOrCreate']);

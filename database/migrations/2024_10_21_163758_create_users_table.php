@@ -14,11 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('work_email')->unique();
-            $table->string('phone_no');
+            $table->string('work_email')->unique()->nullable();;
+            $table->string('phone_no')->nullable();;
             $table->string('organization')-> default('University of Belize');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();;
             $table-> string('picture');
             // $table->string('device_token')->nullable();
             $table->rememberToken();

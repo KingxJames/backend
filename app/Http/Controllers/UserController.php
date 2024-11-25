@@ -76,45 +76,47 @@ class UserController extends Controller
         return response()->json(['total' => $user]);
     }
 
-    public function userSearch(Request $request)
+    // public function userSearch(Request $request)
+    // {
+    //     // Validate input to ensure a search query is provided
+    //     $request->validate([
+    //         'query' => 'required|string|max:255',
+    //     ]);
+
+    //     // Retrieve the search query from the request
+    //     $searchQuery = $request->input('query');
+
+    //     // Search for users by name or email
+    //     $users = User::where('name', 'LIKE', '%' . $searchQuery . '%')
+    //         ->orWhere('email', 'LIKE', '%' . $searchQuery . '%')
+    //         ->get();
+
+    //     // Return the matching users as a JSON response
+    //     return response()->json($users);
+    // }
+
+    public function loginOrCreate(Request $request)
     {
-        // Validate input to ensure a search query is provided
-        $request->validate([
-            'query' => 'required|string|max:255',
-        ]);
-
-        // Retrieve the search query from the request
-        $searchQuery = $request->input('query');
-
-        // Search for users by name or email
-        $users = User::where('name', 'LIKE', '%' . $searchQuery . '%')
-            ->orWhere('email', 'LIKE', '%' . $searchQuery . '%')
-            ->get();
-
-        // Return the matching users as a JSON response
-        return response()->json($users);
-    }
-
-
-    public function checkOrCreate(Request $request)
-    {
-        $validatedData = $request->validate([
+        // Validate the incoming request
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'picture' => 'nullable|string',
+            'email' => 'required|email',
+            'picture' => 'required|url',
         ]);
-
-        // Check if user exists
-        $user = User::where('email', $validatedData['email'])->first();
-
+    
+        // Check if the user already exists
+        $user = User::where('email', $validated['email'])->first();
+    
         if (!$user) {
-            // Create user if they don't exist
-            $user = User::create($validatedData);
+            // If the user does not exist, create a new one
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'picture' => $validated['picture'],
+            ]);
         }
-
-        return response()->json([
-            'message' => 'User checked or created successfully.',
-            'user' => $user,
-        ], 200);
+    
+        // Return the user data
+        return new UserResource($user);
     }
 }
