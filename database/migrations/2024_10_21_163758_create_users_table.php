@@ -18,8 +18,9 @@ return new class extends Migration {
             $table->string('phone_no')->nullable();;
             $table->string('organization')-> default('University of Belize');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();;
-            $table-> string('picture');
+            $table->string('password')->nullable();
+            $table-> string('picture')->nullable();
+            $table->string('google_id_token')->nullable();
             // $table->string('device_token')->nullable();
             $table->rememberToken();
             $table->integer('user_status_id')->nullable();

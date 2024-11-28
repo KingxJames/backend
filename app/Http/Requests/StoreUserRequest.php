@@ -31,6 +31,8 @@ class StoreUserRequest extends FormRequest
             'phoneNo' => ['required'],
             'organization' => ['required'],
             'roleId' => ['required'],
+            'picture'=>['required'],
+            'googleIDToken'=> ['required']
         ];
     }
 
@@ -39,7 +41,8 @@ class StoreUserRequest extends FormRequest
         $this->merge([
             'work_email' => $this->workEmail,
             'phone_no' => $this->phoneNo,
-            'role_id' => $this->roleId
+            'role_id' => $this->roleId,
+            'google_id_token' => $this->googleIDToken
         ]);
     }
 }
