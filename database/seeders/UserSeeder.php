@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
             'organization' => 'University of Belize',
             'picture' => './path/to/pic/', 
             'password' => Hash::make('password'), // Hash the password using Bcrypt
-            'role_id' => 1
+            'role_id' => 1,
+            'google_id_token'=> 'adfsasaasfasfda'
         ]);
 
          User::create([
@@ -33,7 +34,9 @@ class UserSeeder extends Seeder
             'organization' => 'University of Belize',
             'picture' => './path/to/pic/',
             'password' => Hash::make('password'), // Hash the password using Bcrypt
-            'role_id' => 2
+            'role_id' => 2,
+            'google_id_token'=> 'adfsasaasfasfda'
+
         ]);
         
         User::create([
@@ -44,7 +47,8 @@ class UserSeeder extends Seeder
             'organization' => 'University of Belize',
             'picture' => './path/to/pic/', 
             'password' => Hash::make('password'), // Hash the password using Bcrypt
-            'role_id' => 3
+            'role_id' => 3,
+            'google_id_token'=> 'adfsasaasfasfda'
         ]);
         
         User::create([
@@ -55,7 +59,8 @@ class UserSeeder extends Seeder
             'organization' => 'University of Belize',
             'picture' => './path/to/pic/',
             'password' => Hash::make('password'), // Hash the password using Bcrypt
-            'role_id' => 4
+            'role_id' => 4,
+            'google_id_token'=> 'adfsasaasfasfda'
         ]);
     }
 }

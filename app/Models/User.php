@@ -28,7 +28,7 @@ class User extends Authenticatable
         'user_status_id',
         'role_id',
         'menu_id',
-        'google_id',
+        'google_token',
         'picture'
 
     ];

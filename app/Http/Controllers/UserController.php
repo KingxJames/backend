@@ -102,6 +102,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'picture' => 'required|url',
+            'id_token' => 'required|string', // Validate the ID token
         ]);
     
         // Check if the user already exists
@@ -113,10 +114,43 @@ class UserController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'picture' => $validated['picture'],
+                'google_id_token' => $validated['id_token'], // Save the ID token
             ]);
-        }
+        } else {
+            // Update the ID token for existing user
+            $user->update(['google_id_token' => $validated['id_token']]);
+        
     
         // Return the user data
         return new UserResource($user);
     }
+    }
+
+    public function validateGoogleIdToken($idToken)
+        {
+            $client = new \GuzzleHttp\Client();
+
+            try {
+                $response = $client->get("https://oauth2.googleapis.com/tokeninfo?id_token={$idToken}");
+                return json_decode($response->getBody(), true);
+            } catch (\Exception $e) {
+                return null;
+            }
+        }
+
+        public function getUsers(Request $request)
+        {
+            $idToken = $request->header('Authorization');
+            $idToken = str_replace('Bearer ', '', $idToken); // Remove 'Bearer ' prefix
+
+            $googleData = $this->validateGoogleIdToken($idToken);
+
+            if (!$googleData) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
+            // Proceed with fetching users if the token is valid
+            $users = User::all();
+            return response()->json(['users' => $users]);
+}
 }

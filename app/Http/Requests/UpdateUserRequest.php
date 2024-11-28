@@ -32,7 +32,8 @@ class UpdateUserRequest extends FormRequest
                 'phoneNo' => ['required'],
                 'organization' => ['required'],
                 'roleId' => ['required'],
-                'picture' => ['required']
+                'picture' =>['required'],
+                'googleIDToken' => ['required'],
             ];
         } else {
             return [
@@ -43,7 +44,8 @@ class UpdateUserRequest extends FormRequest
                 'phoneNo' => ['sometimes', 'required'],
                 'organization' => ['sometimes', 'required'],
                 'roleId' => ['sometimes', 'required'],
-                'picture' => ['sometimes', 'required']
+                'picture' => ['sometimes', 'required'],
+                'googleIDToken' => ['sometimes', 'required'],
             ];
         }
     }
@@ -53,7 +55,8 @@ class UpdateUserRequest extends FormRequest
         $this->merge([
             'work_email' => $this->workEmail,
             'phone_no' => $this->phoneNo,
-            'role_id' => $this->roleId
+            'role_id' => $this->roleId,
+            'google_id_token' => $this -> googleIDToken,
         ]);
     }
 }
