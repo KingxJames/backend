@@ -23,25 +23,31 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             // 'messageCategoryId'=>['required'],
-            'senderId'=>['required'],
-            'topic'=>['required'],
-            'message'=>['required'],
-            'location'=>['required'],
-            'dateSent'=>['required'],
-            'isArchive'=>['required'],
-            'isDeleted'=>['required'],
-            'isForwarded'=>['required'],
-            'type'=>['required'],
+            'user' => ['required'],
+            // 'senderId' => ['required'],
+            // 'topic' => ['required'],
+            'text' => ['required'],
+            'sender' => ['required'],
+            // 'images' => ['required'],
+            // 'location' => ['required'],
+            // 'dateSent' => ['required'],
+            // 'isArchive' => ['required'],
+            // 'isDeleted' => ['required'],
+            // 'isForwarded' => ['required'],
+            // 'type' => ['required'],
+            'timestamp' => ['required', 'date']
         ];
     }
-    protected function prepareForValidation() {
+    protected function prepareForValidation()
+    {
         $this->merge([
             // 'message_category_id' => $this-> messageCategoryId,
-            'sender_id' => $this -> senderId,
-            'date_sent'=> $this->dateSent,
-            'is_archive'=> $this->isArchive,
-            'is_deleted'=> $this->isDeleted,
-            'is_forwarded'=> $this->isForwarded,
+            // 'sender_id' => $this->senderId,
+            // 'date_sent' => $this->dateSent,
+            // 'is_archive' => $this->isArchive,
+            // 'is_deleted' => $this->isDeleted,
+            // 'is_forwarded' => $this->isForwarded,
+
         ]);
     }
 }

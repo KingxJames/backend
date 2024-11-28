@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('message_category_id')->constrained('message_categories'); //we remove it since all functions of the app is using the api and some fuctions will not have message categories 
-            $table->foreignId('sender_id')->constrained('users'); //unlink  the user until a login is implemented in the application
-            $table->string('topic');
-            $table->string('images')->nullable(); //check if we should change it to string
-            $table->text('message');
-            $table->string('location')->nullable();;
-            $table->dateTime('date_sent');
-            $table->boolean('is_archive')->nullable(); //That is allowed to have a null value. This make it optional
-            $table->boolean('is_deleted')->nullable();//That is allowed to have a null value. This make it optional
-            $table->boolean('is_forwarded')->nullable();//That is allowed to have a null value. This make it optional
-            $table->enum('type', ['email', 'sms', 'notification']);
+            $table->string('user')->nullable(); // Optional user field (sender's name, string format)
+            // $table->foreignId('sender_id')->constrained('users')->nullable(); //unlink  the user until a login is implemented in the application
+            $table->string('sender')->nullable();
+            // $table->string('topic')->nullable();
+            // $table->string('images')->nullable(); //check if we should change it to string
+            $table->text('text')->nullable();
+            // $table->string('location')->nullable();;
+            // $table->dateTime('date_sent')->nullable();
+            // $table->boolean('is_archive')->nullable(); //That is allowed to have a null value. This make it optional
+            // $table->boolean('is_deleted')->nullable();//That is allowed to have a null value. This make it optional
+            // $table->boolean('is_forwarded')->nullable();//That is allowed to have a null value. This make it optional
+            // $table->enum('type', ['email', 'sms', 'notification'])->nullable();
+            $table->timestamp('timestamp')->nullable(); // Use a proper timestamp column
         });
     }
 

@@ -9,16 +9,20 @@ class Message extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'message_category_id',
-        'sender_id',
-        'topic',
-        'message',
-        'location',
-        'date_sent',
-        'is_archive',
-        'is_deleted',
-        'is_forwarded',
-        'type',
+        // 'message_category_id',
+        // 'sender_id',
+        // 'topic',
+        'user',
+        'text',
+        'sender',
+        'timestamp', 
+        // Include custom fields here     
+        // 'location',
+        // 'date_sent',
+        // 'is_archive',
+        // 'is_deleted',
+        // 'is_forwarded',
+        // 'type',
     ];
     public $timestamps = false;
 

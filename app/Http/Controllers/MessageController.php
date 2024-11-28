@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Resources\MessageResource;
 use App\Http\Resources\MessageCollection;
 use App\Http\Requests\StoreMessageRequest;
@@ -13,8 +14,18 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Message::query();
+
+        if ($request->has('type')) {
+            $query->where('type', $request->type);
+        }
+    
+        if ($request->has('date_sent')) {
+            $query->whereDate('date_sent', $request->date_sent);
+        }
+
         return new MessageCollection(Message::paginate());
     }
 
@@ -56,6 +67,7 @@ class MessageController extends Controller
     public function update(UpdateMessageRequest $request, Message $message)
     {
         $message->update($request->all());
+        return new MessageResource($message);
     }
 
     /**

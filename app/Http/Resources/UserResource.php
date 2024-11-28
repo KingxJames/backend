@@ -22,6 +22,9 @@ class UserResource extends JsonResource
             'workEmail' => $this->work_rmail,
             'phoneNo' => $this->phone_no,
             'roleId' => $this->role_id,
+            'picture' => $this->picture,
+            'googleIDToken' => $this->google_id_token,
+
         ];
     }
 }

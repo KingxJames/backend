@@ -22,43 +22,55 @@ class UpdateMessageRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if($method == 'PUT') {
+        if ($method == 'PUT') {
 
-        return [
-            // 'messageCategoryId'=>['required'],
-            'senderId'=>['required'],
-            'topic'=>['required'],
-            'message'=>['required'],
-            'location'=>['required'],
-            'dateSent'=>['required'],
-            'isArchive'=>['required'],
-            'isDeleted'=>['required'],
-            'isForwarded'=>['required'],
-            'type'=>['required'],
-        ];
-    } else {
-        return [
-            // 'messageCategoryId'=>['sometimes','required'],
-            'senderId'=>['sometimes','required'],
-            'topic'=>['sometimes','required'],
-            'message'=>['sometimes','required'],
-            'location'=>['sometimes','required'],
-            'dateSent'=>['sometimes','required'],
-            'isArchive'=>['sometimes','required'],
-            'isDeleted'=>['sometimes','required'],
-            'isForwarded'=>['sometimes','required'],
-            'type'=>['sometimes','required'],
-    ];
+            return [
+                // 'messageCategoryId'=>['required'],
+                'user' => ['required'],
+                // 'senderId' => ['required'],
+                // 'topic' => ['required'],
+                'text' => ['required'],
+                'sender'=>['required'],
+                // 'images' => ['required'],
+                // 'location' => ['required'],
+                // 'dateSent' => ['required'],
+                // 'isArchive' => ['required'],
+                // 'isDeleted' => ['required'],
+                // 'isForwarded' => ['required'],
+                // 'type' => ['required'],
+                'timeStamp' => ['required', 'Date']
+            ];
+        } else {
+            return [
+                // 'messageCategoryId'=>['sometimes','required'],
+                'user' => ['sometimes', 'required'],
+                // 'senderId' => ['sometimes', 'required'],
+                // 'topic' => ['sometimes', 'required'],
+                'sender' => ['sometimes', 'required'],
+                'text' => ['sometimes', 'required'],
+                // 'images' => ['sometimes', 'required'],
+                // 'location' => ['sometimes', 'required'],
+                // 'dateSent' => ['sometimes', 'required'],
+                // 'isArchive' => ['sometimes', 'required'],
+                // 'isDeleted' => ['sometimes', 'required'],
+                // 'isForwarded' => ['sometimes', 'required'],
+                // 'type' => ['sometimes', 'required'],
+                'timestamp' =>['sometimes', 'required'],
+
+
+            ];
+        }
     }
-}
-    protected function prepareForValidation() {
+    protected function prepareForValidation()
+    {
         $this->merge([
             // 'message_category_id' => $this-> messageCategoryId,
-            'sender_id' => $this -> senderId,
-            'date_sent'=> $this->dateSent,
-            'is_archive'=> $this->isArchive,
-            'is_deleted'=> $this->isDeleted,
-            'is_forwarded'=> $this->isForwarded,    
-            ]);
+            // 'sender_id' => $this->senderId,
+            // 'date_sent' => $this->dateSent,
+            // 'is_archive' => $this->isArchive,
+            // 'is_deleted' => $this->isDeleted,
+            // 'is_forwarded' => $this->isForwarded,
+            // 'time_stamp' => $this -> timeStamp
+        ]);
     }
 }
