@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('topic');
             $table->string('images')->nullable(); //check if we should change it to string
             $table->text('message');
-            $table->string('location');
+            $table->string('location')->nullable();;
             $table->dateTime('date_sent');
             $table->boolean('is_archive')->nullable(); //That is allowed to have a null value. This make it optional
             $table->boolean('is_deleted')->nullable();//That is allowed to have a null value. This make it optional

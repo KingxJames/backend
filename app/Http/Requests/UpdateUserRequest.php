@@ -32,6 +32,7 @@ class UpdateUserRequest extends FormRequest
                 'phoneNo' => ['required'],
                 'organization' => ['required'],
                 'roleId' => ['required'],
+                'picture' => ['required']
             ];
         } else {
             return [
@@ -42,6 +43,7 @@ class UpdateUserRequest extends FormRequest
                 'phoneNo' => ['sometimes', 'required'],
                 'organization' => ['sometimes', 'required'],
                 'roleId' => ['sometimes', 'required'],
+                'picture' => ['sometimes', 'required']
             ];
         }
     }

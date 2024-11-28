@@ -31,6 +31,7 @@ class StoreUserRequest extends FormRequest
             'phoneNo' => ['required'],
             'organization' => ['required'],
             'roleId' => ['required'],
+            'picture' => ['required'],
         ];
     }
 
