@@ -15,7 +15,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return new MenuCollection(Menu::paginate());
+        return new MenuCollection(Menu::with('subMenus')->paginate());
     }
 
     /**
@@ -40,9 +40,11 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
+        // return new MenuResource($menu);
+        $menu->load('subMenus');
         return new MenuResource($menu);
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.

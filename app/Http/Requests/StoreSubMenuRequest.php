@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAccessRightRequest extends FormRequest
+class StoreSubMenuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,17 @@ class StoreAccessRightRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description'=>['required'],
-            'roleId'=>['required'],
+            'icon' =>  ['required'],
+            'name' =>  ['required'],
+            'path' => ['required'],
+            'menu_id' =>  ['required'],
         ];
     }
 
-    protected function prepareForValidation() {
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'description'=>$this->description,
-            'role_id'=>$this->roleId 
+            'menu_id' => $this->menuId,
         ]);
     }
-
 }

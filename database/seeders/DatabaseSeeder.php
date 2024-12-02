@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             DepartmentMemberSeeder::class,
             MenuSeeder::class,
             MenuRoleSeeder::class,
+            SubMenuSeeder::class,
         ]);   
      }
 }

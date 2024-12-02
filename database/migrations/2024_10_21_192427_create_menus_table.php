@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            // $table->string('icon')->nullable();
             $table->string('icon');
             $table->string('name');
             $table->string('path');
-            $table->integer('parent_id');
-            // $table->integer('parent_id')->nullable();
-            $table->foreignId('role_id')->constrained('roles');
         });
     }
 

@@ -19,8 +19,8 @@ class MenuResource extends JsonResource
             'icon'=>$this->icon,
             'name'=>$this->name,
             'path'=>$this->path,
-            'parentId'=>$this->parent_id,
-            'roleId'=>$this->role_id,
+            'subMenu' => SubMenuResource::collection($this->whenLoaded('subMenus')), 
+            // 'roleId'=>$this->role_id,
         ];
     }
 }
