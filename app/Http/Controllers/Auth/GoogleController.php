@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+
 
 class GoogleController extends Controller
 {
@@ -44,7 +47,11 @@ class GoogleController extends Controller
             Auth::login($user);
 
             // Generate a token for API authentication (Optional)
-            $token = $user->createToken('GoogleAuthToken')->plainTextToken;
+            // $token = $user->createToken('GoogleAuthToken')->plainTextToken;
+            
+            // Generate a JWT token for the user
+            $token = JWTAuth::fromUser($user);
+
 
             // Redirect to the frontend with token
             return redirect(config('app.frontend_url') . '/?token=' . $token);
@@ -54,13 +61,13 @@ class GoogleController extends Controller
         }
     }
 
- 
+
 
     public function getUser()
     {
         // Get the currently authenticated user
         $user = Auth::user();
-        
+
         // Check if a user is authenticated
         if (!$user) {
             return response()->json(['error' => 'User not authenticated'], 401);

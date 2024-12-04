@@ -9,6 +9,8 @@ use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+
 
 class UserController extends Controller
 {
@@ -70,7 +72,7 @@ class UserController extends Controller
         return response()->json(['message' => 'user deleted successfully'], 200);
     }
 
-    public function getTotalUsers( User $user)
+    public function getTotalUsers(User $user)
     {
         $user = User::count();
         return response()->json(['total' => $user]);
@@ -104,10 +106,10 @@ class UserController extends Controller
             'picture' => 'required|url',
             'id_token' => 'required|string', // Validate the ID token
         ]);
-    
+
         // Check if the user already exists
         $user = User::where('email', $validated['email'])->first();
-    
+
         if (!$user) {
             // If the user does not exist, create a new one
             $user = User::create([
@@ -119,38 +121,49 @@ class UserController extends Controller
         } else {
             // Update the ID token for existing user
             $user->update(['google_id_token' => $validated['id_token']]);
-        
-    
-        // Return the user data
-        return new UserResource($user);
-    }
+
+
+            // Return the user data
+            return new UserResource($user);
+        }
     }
 
     public function validateGoogleIdToken($idToken)
-        {
-            $client = new \GuzzleHttp\Client();
+    {
+        $client = new \GuzzleHttp\Client();
 
-            try {
-                $response = $client->get("https://oauth2.googleapis.com/tokeninfo?id_token={$idToken}");
-                return json_decode($response->getBody(), true);
-            } catch (\Exception $e) {
-                return null;
-            }
+        try {
+            $response = $client->get("https://oauth2.googleapis.com/tokeninfo?id_token={$idToken}");
+            return json_decode($response->getBody(), true);
+        } catch (\Exception $e) {
+            return null;
         }
+    }
 
-        public function getUsers(Request $request)
-        {
-            $idToken = $request->header('Authorization');
-            $idToken = str_replace('Bearer ', '', $idToken); // Remove 'Bearer ' prefix
+    public function getUsers(Request $request)
+    {
+        // $idToken = $request->header('Authorization');
+        // $idToken = str_replace('Bearer ', '', $idToken); // Remove 'Bearer ' prefix
 
-            $googleData = $this->validateGoogleIdToken($idToken);
+        // $googleData = $this->validateGoogleIdToken($idToken);
 
-            if (!$googleData) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
+        // if (!$googleData) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
 
-            // Proceed with fetching users if the token is valid
-            $users = User::all();
-            return response()->json(['users' => $users]);
-}
+        // // Proceed with fetching users if the token is valid
+        // $users = User::all();
+        // return response()->json(['users' => $users]);'
+        try {
+            // Retrieve the authenticated user via JWT token
+            $user = JWTAuth::parseToken()->authenticate();
+
+            return response()->json([
+                'name' => $user->name,
+                'email' => $user->email,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Token is invalid or user not authenticated'], 401);
+        }
+    }
 }

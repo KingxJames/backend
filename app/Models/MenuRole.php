@@ -1,5 +1,8 @@
 <?php
 
+
+// The menu_roles pivot table determines which roles have access to which menus.
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -35,9 +35,9 @@ class Role extends Model
         return $this->hasMany(AccessRight::class);
     }
 
-    public function menu()
+    public function menus()
     {
-        return $this->hasOne(Menu::class);
+        return $this->belongsToMany(Menu::class, 'menu_roles');
     }
 
     public function menuRoles()

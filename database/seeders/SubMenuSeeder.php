@@ -14,27 +14,46 @@ class SubMenuSeeder extends Seeder
     public function run(): void
     {
         //
-        SubMenu::create( [
-            'icon'=>'/icon/1',
-            'name'=>'Chat',
-            'path'=>'Message/Chat',
-            'menu_id'=> 2
+        SubMenu::create([
+            'icon' => '/icon/1',
+            'name' => 'Chat',
+            'path' => 'Message/Chat',
+            'menu_id' => 2
         ]);
 
-        SubMenu::create( [
-            'icon'=>'/icon/2',
-            'name'=>'Anonymous',
-            'path'=>'Message/Anonymous',
-            'menu_id'=> 2
+        SubMenu::create([
+            'icon' => '/icon/2',
+            'name' => 'Anonymous',
+            'path' => 'Message/Anonymous',
+            'menu_id' => 2
         ]);
 
-        SubMenu::create( [
-            'icon'=>'/icon/1',
-            'name'=>'Chat',
-            'path'=>'Message/Emergency',
-            'menu_id'=> 2
+        SubMenu::create([
+            'icon' => '/icon/1',
+            'name' => 'Chat',
+            'path' => 'Message/Emergency',
+            'menu_id' => 2
         ]);
 
+        SubMenu::create([
+            'icon' => '/icon/1',
+            'name' => 'Chat',
+            'path' => 'Report/Now',
+            'menu_id' => 1
+        ]);
+
+        SubMenu::create([
+            'icon' => '/icon/1',
+            'name' => 'Report',
+            'path' => 'Report/Emergency',
+            'menu_id' => 1
+        ]);
+        SubMenu::create([
+            'icon' => '/icon/1',
+            'name' => 'Report',
+            'path' => 'Report/path',
+            'menu_id' => 3
+        ]);
 
     }
 }

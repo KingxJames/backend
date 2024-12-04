@@ -124,6 +124,19 @@ return [
     ],
 
     'frontend_url' => env('FRONTEND_URL', 'http://localhost:5174'),
+    
+//     'providers' => [
+//         'users' => [
+//         'driver' => 'eloquent',
+//         'model' => App\Models\User::class,
+//     ],
+//         PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,
+//         Illuminate\Filesystem\FilesystemServiceProvider::class,
+//     ],
 
+    'aliases' => [
+    'JWTAuth' => PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth::class,
+    'JWTFactory' => PHPOpenSourceSaver\JWTAuth\Facades\JWTFactory::class,
+],
 
 ];

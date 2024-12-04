@@ -18,9 +18,9 @@ class Menu extends Model
     public $timestamps = false;
 
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Role::class, 'menu_roles');
     }
 
     public function menuRoles()
@@ -30,6 +30,6 @@ class Menu extends Model
 
     public function subMenus(): HasMany
     {
-        return $this->hasMany(SubMenu::class, 'menu_id'); 
+        return $this->hasMany(SubMenu::class, 'menu_id');
     }
 }
