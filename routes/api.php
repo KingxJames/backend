@@ -30,7 +30,8 @@ use App\Http\Controllers\Auth\GoogleController;
 
 
 
-
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -38,7 +39,7 @@ use App\Http\Controllers\Auth\GoogleController;
 
 
 
-Route::group(['prefix' => 'v1/publicSafety', 'namespace' => 'App\Http\Controllers'], function () {
+Route::group(['prefix' => 'v1/publicSafety', 'namespace' => 'App\Http\Controllers', 'middleware' => 'auth:sanctum'], function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('campuses', CampusController::class);
@@ -58,6 +59,7 @@ Route::group(['prefix' => 'v1/publicSafety', 'namespace' => 'App\Http\Controller
     Route::get('menus', [MenuController::class, 'getMenus']);
     Route::apiResource('menuRoles', MenuRoleController::class);
     Route::apiResource('subMenus', SubMenuController::class);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 
@@ -79,11 +81,4 @@ Route::get('v1/publicSafety/usersSearch', [UserController::class, 'usersSearch']
 Route::post('v1/publicSafety/loginOrCreate', [UserController::class, 'loginOrCreate']);
 
 
-//Login with JWT
-// Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-//     // Route::post('/register', [AuthController::class, 'register'])->name('register');
-//     Route::post('/login', [AuthController::class, 'login'])->name('login');
-//     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
-//     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
-//     Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
-// });
+

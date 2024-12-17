@@ -6,6 +6,8 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\ForceJsonRequestHeader;
 use Illuminate\Auth\AuthenticationException;
 use App\Http\Middleware\Cors;
+use Illuminate\Http\Request;
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(

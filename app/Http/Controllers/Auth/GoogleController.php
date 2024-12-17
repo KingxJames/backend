@@ -44,14 +44,17 @@ class GoogleController extends Controller
             );
 
             // Log in the user
-            Auth::login($user);
+            // Auth::guard('api')->login($user);
+            // Auth::onceBasic();
 
-            // Generate a token for API authentication (Optional)
-            // $token = $user->createToken('GoogleAuthToken')->plainTextToken;
-            
-            // Generate a JWT token for the user
-            $token = JWTAuth::fromUser($user);
+            // Generate JWT token
+            $token = $user->createToken('Google Auth Token')->plainTextToken;
 
+            // Redirect with token (or return JSON for SPA)
+            return response()->json([
+                'user' => $user,
+                'token' => $token
+            ]);
 
             // Redirect to the frontend with token
             return redirect(config('app.frontend_url') . '/?token=' . $token);
